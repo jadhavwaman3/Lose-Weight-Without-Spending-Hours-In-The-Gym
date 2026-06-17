@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lose Weight — Without The Gym</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest: #1A3A2A;
+    --gold: #D4920A;
+    --gold-light: #F0B429;
+    --sage: #7BA58C;
+    --cream: #F8F5EE;
+    --white: #FFFFFF;
+    --charcoal: #222222;
+    --mid: #555;
+    --light-border: #E2DDD4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    background: rgba(248,245,238,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--light-border);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--forest); letter-spacing: -0.3px;
+  }
+  .logo span { color: var(--gold); }
+  .nav-cta {
+    background: var(--forest); color: #fff;
+    padding: 10px 22px; border-radius: 100px;
+    font-size: 0.82rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #0F2418; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 120px 24px 80px;
+    background: linear-gradient(160deg, #0F2418 0%, #1A3A2A 60%, #22503A 100%);
+    position: relative; overflow: hidden;
+  }
+
+  /* Signature element: glowing orbit ring */
+  .orbit-wrap {
+    position: absolute; right: -80px; top: 50%;
+    transform: translateY(-50%);
+    width: 620px; height: 620px;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+  @media (max-width: 900px) { .orbit-wrap { display: none; } }
+
+  .orbit-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--gold-light);
+    animation: spin 18s linear infinite;
+  }
+  .orbit-ring::before {
+    content: '';
+    position: absolute; top: -6px; left: 50%;
+    width: 12px; height: 12px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 20px 8px rgba(240,180,41,0.6);
+  }
+  .orbit-ring.r2 { inset: 60px; animation-duration: 12s; animation-direction: reverse; opacity: 0.7; }
+  .orbit-ring.r3 { inset: 130px; animation-duration: 8s; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero-inner {
+    max-width: 620px; text-align: center; position: relative; z-index: 2;
+  }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(212,146,10,0.2);
+    border: 1px solid rgba(212,146,10,0.5);
+    color: var(--gold-light);
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 900; line-height: 1.1;
+    color: #fff; margin-bottom: 24px;
+    letter-spacing: -1.5px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.72);
+    font-size: 1.05rem; line-height: 1.75;
+    margin-bottom: 40px; max-width: 480px; margin-inline: auto;
+  }
+  .hero-btns {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: #fff; font-weight: 700; font-size: 0.95rem;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; border: none; cursor: pointer;
+    box-shadow: 0 8px 30px rgba(212,146,10,0.45);
+    transition: transform 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.2px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(212,146,10,0.55);
+  }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.85); font-size: 0.92rem;
+    padding: 15px 28px; border-radius: 100px;
+    text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+
+  .trust-bar {
+    display: flex; justify-content: center; gap: 36px;
+    margin-top: 56px; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.55); font-size: 0.8rem;
+  }
+  .trust-item svg { flex-shrink: 0; }
+
+  /* ── PAIN SECTION ── */
+  .section {
+    padding: 100px 24px;
+  }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--sage); margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 700;
+    line-height: 1.2; letter-spacing: -0.8px;
+    color: var(--forest);
+  }
+  .section-sub {
+    color: var(--mid); font-size: 1rem; line-height: 1.75;
+    margin-top: 14px; max-width: 480px;
+  }
+
+  .pain-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  @media (max-width: 700px) {
+    .pain-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .pain-list {
+    list-style: none; display: flex; flex-direction: column; gap: 16px;
+    margin-top: 36px;
+  }
+  .pain-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: #fff; border: 1px solid var(--light-border);
+    border-radius: 14px; padding: 18px 20px;
+    transition: box-shadow 0.2s;
+  }
+  .pain-list li:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+  .pain-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: #FEF3D6; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .pain-text strong { font-size: 0.9rem; color: var(--charcoal); display: block; margin-bottom: 2px; }
+  .pain-text span { font-size: 0.82rem; color: var(--mid); }
+
+  .stat-block {
+    background: var(--forest); border-radius: 24px;
+    padding: 44px 40px; color: #fff;
+    position: relative; overflow: hidden;
+  }
+  .stat-block::after {
+    content: '';
+    position: absolute; bottom: -40px; right: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(123,165,140,0.15);
+  }
+  .big-stat {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 900;
+    color: var(--gold-light); line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-caption { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.6; }
+  .stat-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 28px 0; }
+  .mini-stats { display: flex; gap: 30px; }
+  .mini-stat .num {
+    font-family: 'Playfair Display', serif; font-size: 2rem;
+    font-weight: 700; color: #fff;
+  }
+  .mini-stat .lbl { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+  /* ── SOLUTION SECTION ── */
+  .solution-section {
+    background: var(--forest); padding: 100px 24px;
+  }
+  .solution-inner { max-width: 1100px; margin: 0 auto; }
+  .solution-section .section-label { color: var(--sage); }
+  .solution-section .section-title { color: #fff; }
+  .solution-section .section-sub { color: rgba(255,255,255,0.65); }
+
+  .pillars {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; margin-top: 52px;
+  }
+  .pillar {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px; padding: 30px 26px;
+    transition: background 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .pillar:hover {
+    background: rgba(255,255,255,0.09);
+    transform: translateY(-4px);
+  }
+  .pillar-num {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 2px;
+    color: var(--gold); opacity: 0.9; margin-bottom: 18px;
+  }
+  .pillar-icon { font-size: 1.8rem; margin-bottom: 14px; }
+  .pillar h3 {
+    font-size: 0.97rem; font-weight: 600; color: #fff; margin-bottom: 8px;
+  }
+  .pillar p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+  .pillar-glow {
+    position: absolute; bottom: -30px; right: -30px;
+    width: 80px; height: 80px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,146,10,0.25), transparent);
+  }
+
+  /* ── PROOF SECTION ── */
+  .proof-section { padding: 100px 24px; }
+  .proof-inner { max-width: 1100px; margin: 0 auto; }
+  .testimonials {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px; margin-top: 52px;
+  }
+  .tcard {
+    background: #fff; border: 1px solid var(--light-border);
+    border-radius: 18px; padding: 28px 26px;
+    transition: box-shadow 0.2s;
+  }
+  .tcard:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+  .stars { color: var(--gold); font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
+  .tcard blockquote {
+    font-size: 0.92rem; line-height: 1.7;
+    color: var(--charcoal); margin-bottom: 20px;
+    font-style: italic;
+  }
+  .tcard-author { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--sage); display: flex; align-items: center;
+    justify-content: center; font-size: 1rem; flex-shrink: 0;
+  }
+  .author-info strong { font-size: 0.88rem; color: var(--charcoal); display: block; }
+  .author-info span { font-size: 0.77rem; color: var(--mid); }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 100px 24px; background: #fff; }
+  .faq-inner { max-width: 720px; margin: 0 auto; }
+  .faq-list { margin-top: 52px; }
+  .faq-item {
+    border-bottom: 1px solid var(--light-border); padding: 22px 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.97rem; font-weight: 600; color: var(--charcoal);
+  }
+  .faq-q .arrow {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--cream); display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+    transition: transform 0.3s, background 0.2s;
+    font-size: 0.9rem; color: var(--forest);
+  }
+  .faq-item.open .faq-q .arrow {
+    transform: rotate(45deg); background: var(--forest); color: #fff;
+  }
+  .faq-a {
+    font-size: 0.88rem; color: var(--mid); line-height: 1.75;
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, margin 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 200px; margin-top: 12px; }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 120px 24px;
+    background: linear-gradient(160deg, #0F2418, #1A3A2A);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,146,10,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; z-index: 2; }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.1rem, 5vw, 3.5rem); font-weight: 900;
+    color: #fff; letter-spacing: -1px; margin-bottom: 20px;
+  }
+  .cta-section h2 em {
+    font-style: normal; color: var(--gold-light);
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.65); font-size: 1rem;
+    max-width: 460px; margin: 0 auto 42px; line-height: 1.75;
+  }
+  .pulse-wrap { display: inline-block; position: relative; }
+  .pulse-ring {
+    position: absolute; inset: -12px; border-radius: 100px;
+    border: 2px solid rgba(212,146,10,0.5);
+    animation: pulse 2.2s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.92); opacity: 1; }
+    100% { transform: scale(1.12); opacity: 0; }
+  }
+  .cta-note {
+    margin-top: 24px; color: rgba(255,255,255,0.4);
+    font-size: 0.78rem; letter-spacing: 0.5px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0A1A10; color: rgba(255,255,255,0.35);
+    text-align: center; padding: 32px 24px; font-size: 0.78rem;
+    line-height: 1.8;
+  }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+    .orbit-ring, .pulse-ring { animation: none; }
+    .btn-primary:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Vital<span>Shift</span></div>
+  <a href="#cta" class="nav-cta">Watch Free Presentation →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orbit-wrap" aria-hidden="true">
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring r2"></div>
+    <div class="orbit-ring r3"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow">No Gym Required</div>
+    <h1>Lose Weight<br>Without<br><em>The Gym</em></h1>
+    <p>Thousands of people are transforming their bodies through simple daily habits — no expensive memberships, no exhausting routines, no extreme diets.</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Watch Free Presentation
+      </a>
+      <a href="#solution" class="btn-outline">See How It Works</a>
+    </div>
+    <div class="trust-bar" aria-label="Trust indicators">
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Natural Approach
+      </div>
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        50,000+ People
+      </div>
+      <div class="trust-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Sustainable Results
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="section">
+  <div class="pain-grid reveal">
+    <div>
+      <div class="section-label">Sound Familiar?</div>
+      <h2 class="section-title">Life Gets In The Way Of<br>Staying Fit</h2>
+      <p class="section-sub">You're not lazy. You're just busy — and the traditional approach to weight loss doesn't fit your life.</p>
+      <ul class="pain-list" role="list">
+        <li>
+          <div class="pain-icon">⏰</div>
+          <div class="pain-text">
+            <strong>No time to work out</strong>
+            <span>Work, family, and life leave little room for long gym sessions</span>
+          </div>
+        </li>
+        <li>
+          <div class="pain-icon">💸</div>
+          <div class="pain-text">
+            <strong>Gym memberships are expensive</strong>
+            <span>You pay every month whether you go or not</span>
+          </div>
+        </li>
+        <li>
+          <div class="pain-icon">🦵</div>
+          <div class="pain-text">
+            <strong>Joint pain limits movement</strong>
+            <span>High-impact exercise feels impossible or risky</span>
+          </div>
+        </li>
+        <li>
+          <div class="pain-icon">📉</div>
+          <div class="pain-text">
+            <strong>Motivation disappears fast</strong>
+            <span>Most people quit within weeks of starting</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="stat-block reveal">
+      <div class="big-stat">80%</div>
+      <div class="stat-caption">of weight loss success is determined by what you eat and your daily habits — not your gym time.</div>
+      <hr class="stat-divider">
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="num">50K+</div>
+          <div class="lbl">People following this approach</div>
+        </div>
+        <div class="mini-stat">
+          <div class="num">0</div>
+          <div class="lbl">Gym sessions required</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution-section" id="solution">
+  <div class="solution-inner">
+    <div class="reveal">
+      <div class="section-label">The Method</div>
+      <h2 class="section-title" style="color:#fff">Five Pillars of Gym-Free<br>Weight Loss</h2>
+      <p class="section-sub">Health experts agree: sustainable weight loss comes from building these habits, not punishing your body.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon">🥗</div>
+        <h3>Smarter Eating Habits</h3>
+        <p>No extreme calorie counting. Just simple, sustainable choices that create a natural calorie deficit.</p>
+        <div class="pillar-glow"></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon">🚶</div>
+        <h3>Daily Movement</h3>
+        <p>A 20-minute walk beats an hour of sporadic hard workouts. Consistency is everything.</p>
+        <div class="pillar-glow"></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon">🌅</div>
+        <h3>Morning Routine Reset</h3>
+        <p>How you start your morning sets your metabolism and mindset for the entire day.</p>
+        <div class="pillar-glow"></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon">🌿</div>
+        <h3>Natural Metabolism Support</h3>
+        <p>Discover which natural solutions thousands are using to support healthy weight management.</p>
+        <div class="pillar-glow"></div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">05</div>
+        <div class="pillar-icon">♾️</div>
+        <h3>Sustainable Lifestyle</h3>
+        <p>Changes you can actually keep for life — not crash diets that leave you worse off than before.</p>
+        <div class="pillar-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof-section">
+  <div class="proof-inner">
+    <div class="reveal" style="text-align:center; max-width:500px; margin:0 auto;">
+      <div class="section-label">Real Results</div>
+      <h2 class="section-title">People Are Seeing Real Changes</h2>
+      <p class="section-sub">No gym. No extreme diets. Just consistent daily habits.</p>
+    </div>
+    <div class="testimonials">
+      <div class="tcard reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"I lost 18 pounds over 3 months without setting foot in a gym once. I just changed what I ate in the morning and started walking after dinner."</blockquote>
+        <div class="tcard-author">
+          <div class="avatar">👩</div>
+          <div class="author-info"><strong>Maria T.</strong><span>Mother of two, UK</span></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"At 54, my knees can't handle intense exercise. This approach finally worked for me — I've kept the weight off for over a year now."</blockquote>
+        <div class="tcard-author">
+          <div class="avatar">👨</div>
+          <div class="author-info"><strong>Robert K.</strong><span>Retired engineer, Canada</span></div>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"My schedule never allowed gym trips. With these simple daily changes, I dropped two dress sizes in four months. I couldn't believe it was this simple."</blockquote>
+        <div class="tcard-author">
+          <div class="avatar">🧑</div>
+          <div class="author-info"><strong>Priya S.</strong><span>Working professional, Australia</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label">Questions</div>
+      <h2 class="section-title">Frequently Asked</h2>
+    </div>
+    <div class="faq-list reveal" role="list">
+      <div class="faq-item" role="listitem" tabindex="0" aria-expanded="false">
+        <div class="faq-q">
+          Can I really lose weight without going to the gym?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Absolutely. Research consistently shows that nutrition and daily habits account for 70–80% of weight loss results. The gym is helpful but not necessary — especially when you focus on sustainable lifestyle changes.</div>
+      </div>
+      <div class="faq-item" role="listitem" tabindex="0" aria-expanded="false">
+        <div class="faq-q">
+          Is walking enough exercise?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Walking is one of the most underrated tools for weight management. A daily 20–30 minute walk, combined with better eating habits, can produce meaningful results for most people without putting stress on joints.</div>
+      </div>
+      <div class="faq-item" role="listitem" tabindex="0" aria-expanded="false">
+        <div class="faq-q">
+          Do I need to follow a strict diet?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">No. Extreme diets almost always fail long-term because they're too restrictive. Sustainable changes — like reducing processed food and eating at consistent times — are far more effective and easier to maintain.</div>
+      </div>
+      <div class="faq-item" role="listitem" tabindex="0" aria-expanded="false">
+        <div class="faq-q">
+          How quickly will I see results?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Results vary based on age, starting point, and consistency. Many people notice energy improvements and minor weight changes within the first 2–3 weeks. Meaningful body changes typically appear within 6–12 weeks of consistent effort.</div>
+      </div>
+      <div class="faq-item" role="listitem" tabindex="0" aria-expanded="false">
+        <div class="faq-q">
+          What is the natural solution people are using?
+          <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">The full details are covered in the free presentation. It explains which natural metabolism-supporting options are gaining popularity and how to evaluate whether they may be right for you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner">
+    <div class="eyebrow" style="background:rgba(212,146,10,0.2);border-color:rgba(212,146,10,0.5);color:var(--gold-light);">Free Presentation</div>
+    <h2 class="reveal">Ready To Discover<br><em>The Complete Method?</em></h2>
+    <p class="reveal">Watch the free presentation to learn exactly what thousands of people are doing to lose weight — without the gym, without extreme diets, and without giving up their lives.</p>
+    <div class="pulse-wrap reveal">
+      <div class="pulse-ring"></div>
+      <a href="#" class="btn-primary" style="font-size:1.05rem; padding:18px 40px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Watch Free Presentation Now
+      </a>
+    </div>
+    <p class="cta-note">Free to watch · No credit card required · Available worldwide</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 VitalShift. All rights reserved.</p>
+  <p style="margin-top:6px;">
+    <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a> · <a href="#">Contact</a>
+  </p>
+  <p style="margin-top:10px;">Results may vary. This website does not provide medical advice. Consult a healthcare professional before making changes to your diet or lifestyle.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const toggle = () => {
+      const isOpen = item.classList.toggle('open');
+      item.setAttribute('aria-expanded', isOpen);
+    };
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+</script>
+</body>
+</html>
